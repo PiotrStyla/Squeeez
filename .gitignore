@@ -1,0 +1,44 @@
+# Data files (too large for GitHub)
+data/enwik8
+data/enwik9
+data/enwik8.zip
+data/enwik9.zip
+data/enwik_10mb
+
+# Compressed results
+*.arith
+*.ctx
+*.zlib
+*_compressed.*
+*_restored.*
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.bak
+*.log
+
+# Keep small sample data
+!data/sample.txt

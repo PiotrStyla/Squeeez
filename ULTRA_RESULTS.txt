@@ -1,0 +1,7 @@
+ULTRA COMPRESSOR - 10 MB TEST RESULTS
+======================================================================
+
+Compression: 1.167 bpb
+Projection enwik9: 139.2 MB
+Gap to record: +25.2 MB
+Time: 92.0 s

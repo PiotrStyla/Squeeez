@@ -1,0 +1,8 @@
+ULTRA COMPRESSOR - 100 MB (enwik8) TEST
+======================================================================
+
+Compression: 1.356 bpb
+Projection enwik9: 161.7 MB
+Gap to record: +47.7 MB
+Time: 1130.3 s (18.8 min)
+Speed: 0.084 MB/s
