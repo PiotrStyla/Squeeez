@@ -1,0 +1,7 @@
+FINAL OPTIMAL RESULTS
+====================
+
+BPB: 1.130
+Projection: 134.7 MB
+Gap to record: +20.7 MB
+Total improvement from original: 4.3 MB

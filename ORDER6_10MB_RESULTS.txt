@@ -1,0 +1,29 @@
+======================================================================
+ORDER-6 ON 10 MB - DECISIVE TEST RESULTS
+======================================================================
+
+Date: 2025-11-22 17:37:59
+
+Input: data/enwik_10mb
+Size: 10,485,760 bytes (10.0 MB)
+
+Results:
+  Compressed: 1,536,264 bytes
+  BPB: 1.172
+  Ratio: 6.83x
+
+Performance:
+  Train time: 54.6 s
+  Compress time: 105.7 s (1.8 min)
+  Speed: 96.9 KB/s
+  Contexts: 3,026,239
+  Memory: ~4846555 MB
+
+Enwik9 Projection:
+  Size: 139.7 MB
+  vs Record (114 MB): +25.7 MB
+  Time (Python): 2.8 hours
+  Time (C++ 10x): 0.3 hours
+
+VERDICT: Order-6 possible but challenging
+Action: Evaluate vs Order-5

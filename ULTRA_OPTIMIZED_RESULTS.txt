@@ -1,0 +1,7 @@
+ULTRA OPTIMIZED RESULTS
+======================
+
+BPB: 1.323
+Projection: 157.7 MB
+vs Record: +43.7 MB
+Time: 210.4 s
