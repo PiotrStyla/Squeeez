@@ -1,0 +1,6 @@
+This is a test of [[Wikipedia]] links and compression.
+The [[Order-6]] model should detect these [[link patterns]].
+Testing [[cascading]] fallback from Order-5 to lower orders.
+Multiple [[links]] like [[this]] and [[that]] create context.
+The [[hybrid]] approach combines [[text]] and [[link]] models.
+This should show [[improvement]] over baseline [[compression]].
