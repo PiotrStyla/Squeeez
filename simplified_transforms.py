@@ -147,6 +147,24 @@ class WikipediaTransforms:
             result = result.replace(original, entity)
         
         return result
+    
+    def transform_file(self, input_path: Path, output_path: Path) -> Dict:
+        """
+        Transform a file and write result to output.
+        
+        Returns statistics dictionary.
+        """
+        print(f"Reading {input_path}...")
+        with open(input_path, 'rb') as f:
+            data = f.read()
+        
+        transformed, stats = self.apply_transforms(data)
+        
+        print(f"Writing {output_path}...")
+        with open(output_path, 'wb') as f:
+            f.write(transformed)
+        
+        return stats
 
 
 class CombinedPreprocessor:
@@ -201,37 +219,36 @@ class CombinedPreprocessor:
 
 
 def main():
-    """Test combined preprocessing on enwik_10mb."""
+    """Apply transforms to enwik9_reordered."""
     
-    starlit_order = Path("starlit/src/readalike_prepr/data/new_article_order")
-    input_file = Path("data/enwik_10mb")
-    temp_reordered = Path("data/enwik_10mb_reordered_temp")
-    output_file = Path("data/enwik_10mb_reordered_transformed")
+    # Just apply transforms to already-reordered file
+    input_file = Path("data/enwik9_reordered")
+    output_file = Path("data/enwik9_reordered_transformed")
     
     # Check files
-    if not starlit_order.exists():
-        print(f"❌ Error: STARLIT order file not found!")
-        return 1
-    
     if not input_file.exists():
-        print(f"❌ Error: Input file not found!")
+        print(f"❌ Error: Input file not found: {input_file}")
         return 1
     
-    # Combined preprocessing
-    preprocessor = CombinedPreprocessor(starlit_order)
-    stats = preprocessor.preprocess(input_file, output_file, temp_reordered)
+    # Apply transforms only (file is already reordered)
+    print(f"\n{'='*60}")
+    print("APPLYING WIKIPEDIA TRANSFORMS TO ENWIK9_REORDERED")
+    print(f"{'='*60}")
+    
+    transformer = WikipediaTransforms()
+    stats = transformer.transform_file(input_file, output_file)
     
     print("\n" + "="*60)
-    print("NEXT STEPS:")
+    print("TRANSFORMS COMPLETE!")
     print("="*60)
-    print("Compress all three versions:")
-    print("  1. Original:              paq8px-wiki.exe -5 enwik_10mb original.paq8")
-    print("  2. Reordered only:        paq8px-wiki.exe -5 enwik_10mb_reordered reordered.paq8")
-    print("  3. Reordered+Transformed: paq8px-wiki.exe -5 enwik_10mb_reordered_transformed combined.paq8")
-    print("\nExpected:")
-    print("  Original:     1,914,555 bytes (baseline)")
-    print("  Reordered:    1,883,466 bytes (1.62% better)")
-    print("  Combined:     ???,??? bytes (hoping for 3-5% better!)")
+    print(f"Input:  {input_file} ({input_file.stat().st_size:,} bytes)")
+    print(f"Output: {output_file} ({output_file.stat().st_size:,} bytes)")
+    print(f"Saved:  {stats['total_saved']:,} bytes")
+    print("\nNEXT STEP:")
+    print("Compress with PAQ8px:")
+    print(f"  cd paq8px")
+    print(f"  .\\paq8px-wiki.exe -5 ..\\{output_file} final.paq8")
+    print("\nExpected: ~178-179 MB (2.16% improvement from 182.6 MB baseline)")
     print("="*60 + "\n")
     
     return 0

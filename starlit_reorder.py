@@ -178,8 +178,8 @@ def main():
     
     # Paths
     starlit_order = Path("starlit/src/readalike_prepr/data/new_article_order")
-    input_file = Path("data/enwik_10mb")
-    output_file = Path("data/enwik_10mb_reordered")
+    input_file = Path("data/enwik9")  # Changed from enwik_10mb to full enwik9
+    output_file = Path("data/enwik9_reordered")
     
     # Check files exist
     if not starlit_order.exists():
