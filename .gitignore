@@ -42,3 +42,22 @@ Thumbs.db
 
 # Keep small sample data
 !data/sample.txt
+
+# Sensitive credentials and authentication
+*CREDENTIALS*.txt
+*SSH_FINGERPRINTS*.txt
+*_PASSWORD*.txt
+*.pem
+*.key
+id_rsa*
+known_hosts
+
+# Scripts with hardcoded credentials
+FULL_AUTO_NETCUP_SETUP.ps1
+FULL_PATH_AUTO.ps1
+SIMPLE_AUTO_SETUP.ps1
+START_NETCUP.bat
+
+# Server-specific configs
+NETCUP_SERVER_CREDENTIALS.txt
+NETCUP_SSH_FINGERPRINTS.txt
