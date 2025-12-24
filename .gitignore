@@ -4,6 +4,10 @@ data/enwik9
 data/enwik8.zip
 data/enwik9.zip
 data/enwik_10mb
+data/enwik9_reordered
+data/enwik9_reordered_transformed
+data/*_transformed
+data/*_reordered
 
 # Compressed results
 *.arith
