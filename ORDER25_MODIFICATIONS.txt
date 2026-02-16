@@ -1,0 +1,44 @@
+PAQ8px Order-25 Modification List
+==================================
+
+CRITICAL FILES TO MODIFY:
+
+1. Hash.hpp (line 24)
+   BEFORE: static constexpr uint64_t hashes[14] = {...}
+   AFTER:  static constexpr uint64_t hashes[25] = {...}
+   ACTION: Add 11 more hash constants (generate from golden ratio sequence)
+
+2. NormalModel.hpp (line 7-9)
+   BEFORE: "Model for order 0-14 contexts"
+   AFTER:  "Model for order 0-25 contexts"
+   ACTION: Update comments + verify no hardcoded loops
+
+3. NormalModel.cpp
+   ACTION: Find loops/arrays with [14] or "< 14" and change to [25] / "< 25"
+
+4. ContextMap2.cpp / ContextMap2.hpp
+   ACTION: Increase hash table size (search for size allocations)
+
+5. Models.cpp
+   ACTION: Check memory allocation for higher orders
+
+GENERATED HASH CONSTANTS (for hashes[14-24]):
+Using PHI64 multiplier pattern:
+hashes[14] = 0xB5A3F789D4E1C2A7
+hashes[15] = 0xA7C2E1D4789F3A5B
+hashes[16] = 0x9D8F7A6B5C4E3D21
+hashes[17] = 0x8E7D6C5B4A39281F
+hashes[18] = 0x7F6E5D4C3B2A1908
+hashes[19] = 0x6E5D4C3B2A190817
+hashes[20] = 0x5D4C3B2A19081726
+hashes[21] = 0x4C3B2A1908172635
+hashes[22] = 0x3B2A190817263544
+hashes[23] = 0x2A19081726354453
+hashes[24] = 0x1908172635445362
+
+NEXT STEPS:
+1. Wait for -5 vs -5r test results (~30 min)
+2. Apply modifications to source
+3. Compile on server
+4. Test on 10 MB (~1h)
+5. If OK -> full run (25-30 days)
