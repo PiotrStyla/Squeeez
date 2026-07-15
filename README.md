@@ -79,10 +79,12 @@ Gap Closed:         80.4% 🎯
 1. **Article Reordering (STARLIT)** - Semantic similarity ordering
 2. **Wikipedia Transforms (HP-2017)** - HTML entities, whitespace normalization
 3. **PAQ8px Stock** - Order-14 context mixing (reverted Order-25 after regression)
+4. **Custom WikipediaLinkModel** - Order-6 [[Wikipedia link]] detector
+5. **Custom CascadingContextModel** - Cascading Order-5→1 fallback contexts
 
 ### Techniques NOT Used Yet:
 
-- LSTM mixing (4-6 MB expected)
+- LSTM mixing (4-6 MB expected) - ✅ Infrastructure ready, pre-training works
 - cmix-style mixing (6-10 MB expected)  
 - Full PPM Order-25 (10-15 MB expected)
 - Memory optimization (3-5 MB expected)
@@ -264,15 +266,15 @@ Phase 1: Article Reordering (STARLIT)
     └─ Similar articles together → better context
     ↓
 Phase 2: Wikipedia Transforms
-    ├─ HTML entities: &lt; → <
+    ├─ HTML entities: < → <
     ├─ Bracket normalization
     └─ Whitespace cleanup
     ↓
 Phase 3: PAQ8px Compression
-    ├─ Order-25 contexts (15, 18, 22, 25)
-    ├─ WikipediaLinkModel (Order-6)
-    ├─ CascadingContextModel (Order-5→1)
-    ├─ Standard PAQ8 models (Order-14)
+    ├─ Order-14 contexts (stock)
+    ├─ WikipediaLinkModel (Order-6 [[link]] detector)
+    ├─ CascadingContextModel (Order-5→1 fallback)
+    ├─ Standard PAQ8 models
     └─ Context mixing & arithmetic coding
     ↓
 Compressed File: 127.44 MB (✅ ACHIEVED!)
@@ -292,6 +294,10 @@ Compressed File: 127.44 MB (✅ ACHIEVED!)
 
 ### Short-term (Close Remaining 13.44 MB)
 - [ ] **LSTM Mixer** - Neural network prediction layer (4-6 MB expected)
+  - ✅ LSTM infrastructure integrated (paq8px -L flag)
+  - ✅ Model training/loading working (-savelstm/text, -loadlstm/text)
+  - 🔧 **Fix**: Decompression validation allows -loadlstm without -L flag
+  - ⏳ Train on full enwik9, test -8L/-9L compression
 - [ ] **cmix-style Mixing** - Advanced context mixing (6-10 MB expected)
 - [ ] **Full PPM Order-25** - Proper algorithm, not just context extension (10-15 MB expected)
 - [ ] **Memory Optimization** - Memory-mapped PPM (3-5 MB expected)
